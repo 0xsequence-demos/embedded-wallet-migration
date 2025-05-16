@@ -13,11 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -46,12 +53,17 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+input:focus,
+input:hover,
+input:active {
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
 
 @media (prefers-color-scheme: light) {
@@ -59,10 +71,136 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.main-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recommendation-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background-color: #e6f4ea;
+  padding: 16px;
+  border: 1px solid #b5e3c4;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.recommendation-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.recommendation-text {
+  margin: 0;
+  color: #1b4332;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.recommendation-text>div {
+  display: flex;
+  gap: 6px;
+}
+
+.click-here {
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  font-weight: 700;
+  background-color: transparent;
+  padding: 0;
+  color: #1b4332;
+  border: none;
+}
+
+.click-here:hover {
+  border: none;
+  padding: 0;
+}
+
+.inventory-nfts-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inventory-nft-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  width: 300px;
+  padding: 25px;
+  background-image: linear-gradient(to left, #7537f9, #5826ff);
+  border-radius: 12px;
+}
+
+.inventory-nft-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+}
+
+.inventory-nft-transfer-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100dvh;
+  width: 100dvw;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inventory-nft-transfer-box>form {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(to left, #7537f9, #5826ff);
+  padding: 20px;
+  border-radius: 12px;
+  gap: 8px;
+}
+
+.inventory-nft-transfer-label {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+}
+
+.inventory-nft-transfer-label>input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.inventory-nft-transfer-metadata {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
 }
