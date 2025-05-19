@@ -15,10 +15,10 @@ export function NftDetails({ nft }: { nft: any }) {
   const {
     mutate: sendTransaction,
     isPending,
-    data,
     isSuccess,
     isError,
     error,
+    reset,
   } = useSendTransaction();
   const chain = useActiveWalletChain();
   let { tokenAddress, id } = nft;
@@ -27,6 +27,12 @@ export function NftDetails({ nft }: { nft: any }) {
 
   function handleOnCloseTransferModal() {
     setOpenedTransferModal(false);
+    setTransferDestination("");
+  }
+
+  function handleOnOpenTransferModal() {
+    reset();
+    setOpenedTransferModal(true);
     setTransferDestination("");
   }
 
@@ -72,7 +78,7 @@ export function NftDetails({ nft }: { nft: any }) {
           alt={name || ""}
         />
         <p className="inventory-nft-name">{name || ""}</p>
-        <button onClick={() => setOpenedTransferModal(true)}>Transfer</button>
+        <button onClick={handleOnOpenTransferModal}>Transfer</button>
       </div>
 
       {/* Transfer Modal */}
@@ -89,11 +95,23 @@ export function NftDetails({ nft }: { nft: any }) {
               <p className="inventory-nft-name">{name || ""}</p>
               <p>Owned: {quantityOwnedString}</p>
             </div>
-            <label className="inventory-nft-transfer-label">
-              <span>Destination Address</span>
-              <input type="text" onChange={onChangeTransferDestination} />
-            </label>
-            <button type="submit">Transfer now</button>
+            {!isSuccess && (
+              <>
+                <label className="inventory-nft-transfer-label">
+                  <span>Destination Address</span>
+                  <input type="text" onChange={onChangeTransferDestination} />
+                </label>
+                <button type="submit">
+                  {!isPending ? (
+                    "Transfer now"
+                  ) : (
+                    <div className="spinner margin-auto"></div>
+                  )}
+                </button>
+              </>
+            )}
+            {isSuccess && <p>Transfer completed successfully!</p>}
+            {isError && <p>{error.message}</p>}
             <button type="button" onClick={handleOnCloseTransferModal}>
               Close modal
             </button>

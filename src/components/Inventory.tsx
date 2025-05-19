@@ -23,14 +23,16 @@ export function Inventory() {
 
   return (
     <div>
-      <h2>Inventory</h2>
+      <h2 className="title">Inventory</h2>
       <div className="inventory-nfts-box">
         {nfts?.map((nft) => (
-          <NftDetails
-            nft={nft}
-            key={nft?.metadat?.tokenAddress + nft?.metadata?.id}
-          />
+          <NftDetails nft={nft} key={nft?.tokenAddress + nft?.id} />
         ))}
+        {nfts?.length === 0 && (
+          <div className="flex justify-center">
+            <p>Nothing to Show</p>
+          </div>
+        )}
       </div>
     </div>
   );
