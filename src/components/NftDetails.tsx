@@ -21,8 +21,8 @@ export function NftDetails({ nft }: { nft: any }) {
     reset,
   } = useSendTransaction();
   const chain = useActiveWalletChain();
-  let { tokenAddress, id } = nft;
-  let { image, name, quantityOwned } = nft?.metadata;
+  let { tokenAddress, id, quantityOwned } = nft;
+  let { image, name } = nft?.metadata;
   const quantityOwnedString = quantityOwned?.toString() || "1";
 
   function handleOnCloseTransferModal() {
