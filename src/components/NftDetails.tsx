@@ -52,19 +52,35 @@ export function NftDetails({ nft }: { nft: any }) {
       address: tokenAddress,
     });
 
-    const transaction = prepareContractCall({
-      contract,
-      method:
-        "function safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes data)",
-      params: [
-        account.address,
-        transferDestination,
-        BigInt(id),
-        BigInt(1),
-        "0x",
-      ],
-      value: BigInt(0),
-    });
+    const transaction =
+      nft.type.toLowerCase() === "erc721"
+        ? prepareContractCall({
+            contract,
+            method:
+              "function safeTransferFrom(address from, address to, uint256 id, bytes data)",
+            params: [account.address, transferDestination, BigInt(id), "0x"],
+            value: BigInt(0),
+          })
+        : nft.type.toLowerCase() === "erc1155"
+        ? prepareContractCall({
+            contract,
+            method:
+              "function safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes data)",
+            params: [
+              account.address,
+              transferDestination,
+              BigInt(id),
+              BigInt(1),
+              "0x",
+            ],
+            value: BigInt(0),
+          })
+        : null;
+
+    if (!transaction) {
+      alert("Invalid NFT type");
+      return;
+    }
 
     sendTransaction(transaction);
   }
